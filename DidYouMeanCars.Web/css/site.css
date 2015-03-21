@@ -1,0 +1,8 @@
+.container-section {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.hoverwell:hover {
+  background-color: #52575c;
+  cursor: pointer;
+}

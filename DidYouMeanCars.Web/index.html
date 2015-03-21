@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="vendor/toastr/toastr.css">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body ng-app="app">
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/issues">Issues</a></li>
+            <li><a href="/projects/new">Create a project</a></li>
+        </ul>
+    </div>
+</div>
+<section class="content">
+    <div ng-view class="container-section"></div>
+</section>
+<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="vendor/angular/angular.js"></script>
+<script type="text/javascript" src="vendor/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/home/homeController.js"></script>
+</body>
+</html>
