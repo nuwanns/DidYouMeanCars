@@ -2,7 +2,7 @@
 
     var repository = require('../infrastructure/repository');
 
-    todoListCommandHandlers.createToDoList = function(command) {
+    todoListCommandHandlers.createTodoList = function(command) {
         var todoList = new TodoList(command.name);
         repository.save(todoList);
     };

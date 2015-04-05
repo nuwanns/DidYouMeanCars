@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="commandHandlers\todoListCommandHandlers.js" />
+    <Compile Include="config\bootstrapper.js" />
     <Compile Include="config\config.js" />
     <Compile Include="config\express.js" />
     <Compile Include="config\routes.js" />
