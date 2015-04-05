@@ -41,6 +41,7 @@
     <Compile Include="infrastructure\AggregateRoot.js" />
     <Compile Include="infrastructure\eventSpecification.js" />
     <Compile Include="infrastructure\eventStore.js" />
+    <Compile Include="infrastructure\messageBus.js" />
     <Compile Include="infrastructure\repository.js" />
     <Compile Include="infrastructure\testFormatter.js" />
     <Compile Include="readModel\database.js" />

@@ -6,22 +6,22 @@
 
         app.get("/api/todolist", function(req, res){
             var atomEventReader = require('../services/atomEventReader');
-            atomEventReader.getEventsFromStream('http://127.0.0.1:2113/streams/todolist', function(events){
+            atomEventReader.getEventsFromStream('http://127.0.0.1:2113/streams/todolist-63e645ea-c577-4bad-a9cd-73dae16df91a', function(events){
                 res.set("Content-Type", "application/json");
                 res.send(events);
             });
         });
 
-        app.get("/api/create", function(req, res){
+        app.post("/api/todolist", function(req, res){
             var eventStore = require('../infrastructure/eventStore');
             var events =  [{
                     "eventId": uuid.v4(),
-                    "eventType": "ToDoListRenamed",
+                    "eventType": "TodoListCreated",
                     "data": {
-                        "name": "Personal Tasks x"
+                        "name": req.body.name
                     }
                 }];
-            eventStore.save('http://127.0.0.1:2113/streams/todolist', events);
+            eventStore.save('http://127.0.0.1:2113/streams/todolist-' + uuid.v4(), events);
             res.set("Content-Type", "application/json");
             res.send([{status: 'created'}]);
         });

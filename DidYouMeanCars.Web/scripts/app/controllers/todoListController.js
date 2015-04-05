@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('todoController', function ($scope, $http) {
+﻿angular.module('app').controller('todoListController', function ($scope, $http) {
     //TODO get this from config
     var root = 'http://localhost:1337';
 
@@ -7,5 +7,13 @@
     }, function (err) {
         console.log(err);
     });
+
+    $scope.save = function (todoList) {
+        $http.post(root + '/api/todolist', { name: todoList.name })
+            .success(function (data) { })
+            .error(function (data) {
+                console.log(data);
+            });
+    };
 
 });
