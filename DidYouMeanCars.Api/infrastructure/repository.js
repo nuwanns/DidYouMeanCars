@@ -1,9 +1,9 @@
 (function(repository){
 
-    var eventStore = require('eventStore');
+    var eventStore = require('./eventStore');
 
-    repository.save = function(aggregate, expectedVersion){
-        eventStore.save(aggregate.streamName, aggregate.getUncommitedChanges());
+    repository.save = function(aggregate, callback, expectedVersion){
+        eventStore.save(aggregate, callback, expectedVersion);
     };
 
     repository.getById = function(streamName, id){

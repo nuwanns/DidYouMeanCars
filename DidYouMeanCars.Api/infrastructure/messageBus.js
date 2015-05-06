@@ -7,12 +7,12 @@
         handlers.push({ type: type, handler: handler });
     };
     
-    messageBus.send = function(type, command){
-        var handler = _.find(handlers, function (handler) {
-            return handler.type === type;
+    messageBus.send = function(type, command, callback){
+        var wrapper = _.find(handlers, function (item) {
+            return item.type === type;
         });
-        if (handler) {
-            handler(command);
+        if (wrapper) {
+            wrapper.handler.call(this, command, callback);
         }
     };
 

@@ -1,52 +1,52 @@
-(function(TodoList){
+var AggregateRoot = require('../infrastructure/AggregateRoot'),
+    util = require('util'), 
+    uuid = require('node-uuid');
 
-    var AggregateRoot = require('../infrastructure/AggregateRoot'),
-        util = require('util');
+function TodoList(id, name) {
+    this.streamName = 'todolist';
+    AggregateRoot.call(this, id);
+    this.applyChange(new this.TodoListCreated(name));
+};
 
-    TodoList = function (id, name) {
-        applyChange(new TodoListCreated(id, name));
-    };
+util.inherits(TodoList, AggregateRoot);
 
-    util.inherits(TodoList, AggregateRoot);
+TodoList.prototype.rename = function (newName) {
+    this.applyChange(new this.TodoListRenamed(newName));
+};
 
-    TodoList.prototype.rename = function(id,newName){
-        applyChange(new TodoListRenamed(id, newName));
-    };
+TodoList.prototype.archive = function () {
+    this.applyChange(new this.TodoListArchived());
+};
 
-    TodoList.prototype.archive = function(){
-        applyChange(new TodoListArchived(id));
-    };
-    
-    // Event handlers
+// Event handlers
 
-    TodoList.prototype.applyTodoListCreated = function(event) {
-        this.id = event.id;
-        this.isArchived = false;
-    };
+TodoList.prototype.applyTodoListCreated = function (event) {
+    this.isArchived = false;
+};
 
-    TodoList.prototype.applyTodoListArchived = function (event) {
-        this.isArchived = true;
-    };
-    
-    // Domain events
+TodoList.prototype.applyTodoListArchived = function (event) {
+    this.isArchived = true;
+};
 
-    TodoList.prototype.TodoListCreated = function (id, name) {
-        this.type = 'TodoListCreated';
-        this.id = id;
-        this.name = name;
-    };
-    
-    TodoList.prototype.TodoListRenamed = function (id, newName) {
-        this.type = 'TodoListRenamed';
-        this.id = id;
-        this.newName = newName;
-    };
-    
-    TodoList.prototype.TodoListArchived = function (id) {
-        this.type = 'TodoListArchived';
-        this.id = id;
-    };
+// Domain events
 
-})(module.exports);
+TodoList.prototype.TodoListCreated = function (name) {
+    this.eventType = 'TodoListCreated';
+    this.eventId = uuid.v4();
+    this.data = {name : name};
+};
+
+TodoList.prototype.TodoListRenamed = function (newName) {
+    this.eventType = 'TodoListRenamed';
+    this.eventId = uuid.v4();
+    this.data = {newName : newName};
+};
+
+TodoList.prototype.TodoListArchived = function () {
+    this.eventType = 'TodoListArchived';
+    this.eventId = uuid.v4();
+};
+
+module.exports = TodoList;
 
 

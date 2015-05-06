@@ -10,15 +10,16 @@
         });
     };
 
-    eventStore.save = function(streamName, events){
-        var options = url.parse(streamName);
+    eventStore.save = function (aggregate, callback){
+        var options = url.parse(aggregate.eventStoreUrl + aggregate.streamName + '-' + aggregate.id);
         options.headers = { 'Content-Type':'application/vnd.eventstore.events+json' };
         options.method = 'POST';
         var request = http.request(options, function(res){
             console.log('event writing status is ' + res.statusCode);
         });
-        request.write(JSON.stringify(events));
+        request.write(JSON.stringify(aggregate.getUncommitedChanges()));
         request.end();
+        callback(true);
     };
 
 })(module.exports);
