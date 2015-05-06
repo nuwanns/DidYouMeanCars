@@ -10,7 +10,7 @@ AggregateRoot.prototype.getUncommitedChanges = function () {
 }
 
 AggregateRoot.prototype.markChangesAsCommitted = function () {
-    this.changes.clear();
+    this.changes = [];
 }
 
 AggregateRoot.prototype.loadFromHistory = function (events) {

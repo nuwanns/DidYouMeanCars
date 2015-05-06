@@ -1,7 +1,6 @@
-(function(TodoListViewModel){
-    TodoListViewModel = function(id, name){
-      var self = this;
-        self.id = id;
-        self.name = name;
-    };
-})(module.exports);
+function TodoListViewModel(id, name) {
+    this.id = id;
+    this.name = name;
+}
+
+module.exports = TodoListViewModel;

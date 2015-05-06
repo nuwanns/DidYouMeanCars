@@ -5,17 +5,17 @@ var AggregateRoot = require('../infrastructure/AggregateRoot'),
 function TodoList(id, name) {
     this.streamName = 'todolist';
     AggregateRoot.call(this, id);
-    this.applyChange(new this.TodoListCreated(name));
+    this.applyChange(new this.TodoListCreated(id, name));
 };
 
 util.inherits(TodoList, AggregateRoot);
 
 TodoList.prototype.rename = function (newName) {
-    this.applyChange(new this.TodoListRenamed(newName));
+    this.applyChange(new this.TodoListRenamed(this.id, newName));
 };
 
 TodoList.prototype.archive = function () {
-    this.applyChange(new this.TodoListArchived());
+    this.applyChange(new this.TodoListArchived(this.id));
 };
 
 // Event handlers
@@ -30,21 +30,23 @@ TodoList.prototype.applyTodoListArchived = function (event) {
 
 // Domain events
 
-TodoList.prototype.TodoListCreated = function (name) {
+TodoList.prototype.TodoListCreated = function (id, name) {
+    var self = this;
     this.eventType = 'TodoListCreated';
     this.eventId = uuid.v4();
-    this.data = {name : name};
+    this.data = {id : id, name : name};
 };
 
-TodoList.prototype.TodoListRenamed = function (newName) {
+TodoList.prototype.TodoListRenamed = function (id, newName) {
     this.eventType = 'TodoListRenamed';
     this.eventId = uuid.v4();
-    this.data = {newName : newName};
+    this.data = {id : id, newName : newName};
 };
 
-TodoList.prototype.TodoListArchived = function () {
+TodoList.prototype.TodoListArchived = function (id) {
     this.eventType = 'TodoListArchived';
     this.eventId = uuid.v4();
+    this.data = { id : id };
 };
 
 module.exports = TodoList;

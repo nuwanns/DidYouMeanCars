@@ -16,4 +16,18 @@
         }
     };
 
+    messageBus.publish = function (event) {
+        var wrappers = _.filter(handlers, function (item) { 
+            return event.eventType == item.type;
+        });
+        var callback = function (error){
+            if (error) {
+                console.log(error);
+            }
+        }
+        _.each(wrappers, function (wrapper) {
+            wrapper.handler.call(this, event, callback);
+        });
+    };
+
 })(module.exports);

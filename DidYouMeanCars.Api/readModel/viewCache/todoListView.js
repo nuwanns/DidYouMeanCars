@@ -3,14 +3,12 @@
     var database = require('../database');
     var TodoListViewModel = require('../viewModels/todoListViewModel');
 
-    todoListView = function(){};
-
-    todoListView.prototype.handleTodoListCreated = function(message, next){
+    todoListView.handleTodoListCreated = function(event, next){
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.todoList.insert(new TodoList(message.id, message.name), function (err) {
+                db.todoList.insert(new TodoListViewModel(event.data.id, event.data.name), function (err) {
                     if (err) {
                         next(err);
                     } else {
@@ -21,12 +19,12 @@
         });
     };
 
-    todoListView.prototype.handleTodoListRenamed = function(message, next){
+    todoListView.handleTodoListRenamed = function(event, next){
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({id : message.id}, {name : message.name}, {upsert : false}, function (err) {
+                db.todoList.update({id : event.data.id}, {name : event.data.name}, {upsert : false}, function (err) {
                     if (err) {
                         next(err);
                     } else {
@@ -37,12 +35,12 @@
         });
     };
 
-    todoListView.prototype.handleTodoListArchived = function(){
+    todoListView.handleTodoListArchived = function(event, next){
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({id : message.id}, {isArchived : message.isArchived}, {upsert : false}, function (err) {
+                db.todoList.update({id : event.data.id}, {isArchived : event.data.isArchived}, {upsert : false}, function (err) {
                     if (err) {
                         next(err);
                     } else {
