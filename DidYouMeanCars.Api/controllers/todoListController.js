@@ -30,6 +30,18 @@
             };
             messageBus.send('CreateTodoList', { id : uuid.v4(), name : req.body.name }, callback);
         });
+
+        app.put("/api/todolist", function (req, res) {
+            var callback = function (isSuccessful) {
+                res.set("Content-Type", "application/json");
+                if (isSuccessful) {
+                    res.send([{ status: 'updated' }]);
+                } else {
+                    res.send([{ status: 'error updating the resource' }]);
+                }
+            };
+            messageBus.send('RenameTodoList', { id : req.body.id, newName : req.body.newName }, callback);
+        });
     };
 
 })(module.exports);

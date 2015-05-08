@@ -3,9 +3,11 @@ var AggregateRoot = require('../infrastructure/AggregateRoot'),
     uuid = require('node-uuid');
 
 function TodoList(id, name) {
-    this.streamName = 'todolist';
+    this.isArchived = null;
     AggregateRoot.call(this, id);
-    this.applyChange(new this.TodoListCreated(id, name));
+    if (name) {
+        this.applyChange(new this.TodoListCreated(id, name));
+    }
 };
 
 util.inherits(TodoList, AggregateRoot);

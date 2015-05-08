@@ -6,3 +6,16 @@
   background-color: #52575c;
   cursor: pointer;
 }
+
+/*.app-modal-window .modal-dialog {
+  width: 500px;
+  height: 300px !important;
+  overflow:hidden;
+}
+
+.modal-backdrop {
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+}*/
+

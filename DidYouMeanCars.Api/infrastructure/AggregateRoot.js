@@ -1,7 +1,6 @@
 function AggregateRoot(id) {
     this.id = id;
     this.version = 0;
-    this.eventStoreUrl = 'http://127.0.0.1:2113/streams/';
     this.changes = [];
 };
 
@@ -14,17 +13,18 @@ AggregateRoot.prototype.markChangesAsCommitted = function () {
 }
 
 AggregateRoot.prototype.loadFromHistory = function (events) {
+    var self = this;
     events.forEach(function (e) {
-        this.applyChange(e, true);
+        self.applyChange(e, true);
     });
 }
 
 AggregateRoot.prototype.applyChange = function (event, shouldSkip) {
     if ('apply' + event.eventType in this) {
         this['apply' + event.eventType](event);
-        if (!shouldSkip) {
-            this.changes.push(event);
-        }
+    }
+    if (!shouldSkip) {
+        this.changes.push(event);
     }
 }
 

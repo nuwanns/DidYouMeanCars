@@ -6,14 +6,14 @@
         _ = require('underscore'),
         url = require('url');
 
-    eventStore.getEventsForAggregate = function(streamName){
-        atomEventReader.getEventsFromStream('http://127.0.0.1:2113/streams/todolist', function(events){
-            var x = events.length;
+    eventStore.getEventsForAggregate = function(streamName, next){
+        atomEventReader.getEventsFromStream(streamName, function(events){
+            next(events);
         });
     };
 
-    eventStore.save = function (aggregate, callback){
-        var options = url.parse(aggregate.eventStoreUrl + aggregate.streamName + '-' + aggregate.id);
+    eventStore.save = function (streamUrl, aggregate, callback){
+        var options = url.parse(streamUrl);
         options.headers = { 'Content-Type':'application/vnd.eventstore.events+json' };
         options.method = 'POST';
         var request = http.request(options, function(res){

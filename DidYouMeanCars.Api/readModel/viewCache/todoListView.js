@@ -1,9 +1,9 @@
-(function(todoListView){
-
+(function (todoListView) {
+    
     var database = require('../database');
     var TodoListViewModel = require('../viewModels/todoListViewModel');
-
-    todoListView.handleTodoListCreated = function(event, next){
+    
+    todoListView.handleTodoListCreated = function (event, next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
@@ -18,13 +18,13 @@
             }
         });
     };
-
-    todoListView.handleTodoListRenamed = function(event, next){
+    
+    todoListView.handleTodoListRenamed = function (event, next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({id : event.data.id}, {name : event.data.name}, {upsert : false}, function (err) {
+                db.todoList.update({ id : event.data.id }, { $set: { name: event.data.newName } }, function (err) {
                     if (err) {
                         next(err);
                     } else {
@@ -34,13 +34,13 @@
             }
         });
     };
-
-    todoListView.handleTodoListArchived = function(event, next){
+    
+    todoListView.handleTodoListArchived = function (event, next) {
         database.getDb(function (err, db) {
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({id : event.data.id}, {isArchived : event.data.isArchived}, {upsert : false}, function (err) {
+                db.todoList.update({ id : event.data.id }, { isArchived : event.data.isArchived }, { upsert : false }, function (err) {
                     if (err) {
                         next(err);
                     } else {
