@@ -18,7 +18,7 @@
             });
     };
 
-    $scope.open = function (todoList) {
+    $scope.openRenameModal = function (todoList) {
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'renameTodoList.html',

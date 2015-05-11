@@ -9,14 +9,24 @@
     <link href="css/site.css" rel="stylesheet" />
 </head>
 <body ng-app="app">
-    <div class="navbar">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/todolist" class="btn btn-default navbar-btn">Todo list</a>
+                <a href="/todolist/new" class="btn btn-default navbar-btn">Create a new todo list</a>
+            </div>
+        </div>
+    </nav>
+
+    <!--<div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
                 <li><a href="/todolist">Todo list</a></li>
                 <li><a href="/todolist/new">Create a new todo list</a></li>
             </ul>
         </div>
-    </div>
+    </div>-->
     <section class="content">
         <div ng-view class="container-section"></div>
     </section>

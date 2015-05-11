@@ -18,13 +18,13 @@
 
 <h1>Todo list</h1>
 <ul class="thumbnails">
-    <li ng-repeat="todoList in todoLists" class="span5">
+    <li ng-repeat="todoList in todoLists">
         <div class="well hoverwell">
             {{todoList.id}} - {{todoList.name}}
             <div class="row">
-                <div class="col-md-4"><button class="btn btn-default" ng-click="open(todoList)">Rename</button></div>
-                <div class="col-md-4"><input type="button" ng-click="archive()" value="Archive" class="btn btn-default" /></div>
-                <div class="col-md-4"><input type="button" ng-click="addTodo()" value="Add Todo" class="btn btn-default" /></div>
+                <div class="col-md-2"><button class="btn btn-default" ng-click="open(todoList)">Rename</button></div>
+                <div class="col-md-2"><input type="button" ng-click="archive()" value="Archive" class="btn btn-default" /></div>
+                <div class="col-md-2"><input type="button" ng-click="addTodo()" value="Add Todo" class="btn btn-default" /></div>
                 
             </div>
         </div>
