@@ -17,9 +17,9 @@ EventSpecification.prototype.setUp = function () {
 
     };
     try {
-        handler.handle(When());
+        handler.handle(when());
         var produced = fakeStore.peekChanges().toList();
-        var expected = Expect().toList();
+        var expected = expect().toList();
         compareEvents(produced, expected);
     }
     catch (ex) {
