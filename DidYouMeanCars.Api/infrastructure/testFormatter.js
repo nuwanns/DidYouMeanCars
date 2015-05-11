@@ -1,19 +1,20 @@
 (function(testFormatter){
-
-    testFormatter.print = function(specification){
-        Console.WriteLine("Specification: " + specification.GetType().Name.Replace("_", ""));
-        Console.WriteLine();
-        Console.WriteLine("Given that:");
+    
+    testFormatter.formatSpecification = function (specification){
+        var output = 'Specification: ' + specification.getType().name.replace('_', '');
+        output += '\n';
+        output += 'Given that:';
         specification.given().foreach(function(event){
-            Console.WriteLine("\t" + event);
+            output += '\t' + event;
         });
-        Console.WriteLine();
-        Console.WriteLine("When " + specification.When());
-        Console.WriteLine();
-        Console.WriteLine("Expect that:");
+        output += '\n';
+        output += 'When ' + specification.When();
+        output += '\n';
+        output += 'Expect that:';
         specification.expect().foreach(function(event){
-            Console.WriteLine("\t" + event);
+            output += '\t' + event;
         });
+        return output;
     };
 
 })(module.exports);

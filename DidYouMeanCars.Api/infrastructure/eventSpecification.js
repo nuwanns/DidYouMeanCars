@@ -1,34 +1,30 @@
-(function(EventSpecification) {
+var FakeEventStore = require('./FakeEventStore');
 
-    EventSpecification = function(){
-        var self = this;
-        self.caught = null;
-        self.fakeStore = null;
-        self.given = function() {};
-        self.when = function() {};
-        self.onHandler = function() {};
-        self.expect = function() {};
+function EventSpecification() {
+    this.caught = null;
+    this.fakeStore = null;
+    this.given = function () { };
+    this.when = function () { };
+    this.onHandler = function () { };
+    this.expect = function () { };
+}
 
-        self.setUp = function(){
-            Caught = null;
-            FakeStore = new FakeEventStore(Given());
-            var handler = OnHandler();
-            try
-            {
-                handler.Handle(When());
-                var produced = FakeStore.PeekChanges().ToList();
-                var expected = Expect().ToList();
-                compareEvents(produced, expected);
-            }
-            catch (ex)
-            {
-                Caught = ex;
-            }
-        };
+EventSpecification.prototype.setUp = function () {
+    this.caught = null;
+    this.fakeStore = new FakeEventStore(given());
+    var handler = onHandler();
+    var compareEvents = function (produced, expected) {
 
-        function compareEvents(produced, expected){
-
-        }
     };
+    try {
+        handler.handle(When());
+        var produced = fakeStore.peekChanges().toList();
+        var expected = Expect().toList();
+        compareEvents(produced, expected);
+    }
+    catch (ex) {
+        this.caught = ex;
+    }
+};
 
-})(module.exports);
+module.exports = EventSpecification;
