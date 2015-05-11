@@ -34,10 +34,10 @@
         modalInstance.result.then(function (selectedTodoList) {
             $http.put(root + '/api/todolist', { id: selectedTodoList.id, newName: selectedTodoList.newName })
             .success(function (data) {
-                alert('saved');
+                $scope.renameSuccessfulNotification.show('Renaming was successful', 'info')
             })
             .error(function (data) {
-                console.log(data);
+                $scope.errorNotification.show(data, 'error');
             });
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
@@ -60,3 +60,4 @@ angular.module('app').controller('renameTodoListController', ['$scope', '$modalI
         };
 
     }]);
+

@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ngRoute', 'ui.bootstrap']);
+angular.module('app', ['ngResource', 'ngRoute', 'ui.bootstrap', 'kendo.directives']);
 
 angular.module('app').config(function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);

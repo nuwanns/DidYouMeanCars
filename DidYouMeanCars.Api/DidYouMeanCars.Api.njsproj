@@ -38,6 +38,7 @@
     <Compile Include="config\routes.js" />
     <Compile Include="controllers\controllers.js" />
     <Compile Include="controllers\todoListController.js" />
+    <Compile Include="domain\TodoItem.js" />
     <Compile Include="domain\TodoList.js" />
     <Compile Include="infrastructure\AggregateRoot.js" />
     <Compile Include="infrastructure\eventSpecification.js" />

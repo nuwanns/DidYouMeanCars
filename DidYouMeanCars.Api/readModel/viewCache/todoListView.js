@@ -40,7 +40,23 @@
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({ id : event.data.id }, { isArchived : event.data.isArchived }, { upsert : false }, function (err) {
+                db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        next(null);
+                    }
+                });
+            }
+        });
+    };
+
+    todoListView.handleTodoItemCreated = function (event, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, function (err) {
                     if (err) {
                         next(err);
                     } else {

@@ -18,16 +18,19 @@
 
 <h1>Todo list</h1>
 <ul class="thumbnails">
-    <li ng-repeat="todoList in todoLists">
+    <li ng-repeat="todoList in todoLists">s
         <div class="well hoverwell">
             {{todoList.id}} - {{todoList.name}}
             <div class="row">
                 <div class="col-md-2"><button class="btn btn-default" ng-click="openRenameModal(todoList)">Rename</button></div>
                 <div class="col-md-2"><input type="button" ng-click="archive()" value="Archive" class="btn btn-default" /></div>
                 <div class="col-md-2"><input type="button" ng-click="addTodo()" value="Add Todo" class="btn btn-default" /></div>
-                
+
             </div>
         </div>
     </li>
 </ul>
+<span kendo-notification="saveSuccessfulNotification"></span>
+<span kendo-notification="renameSuccessfulNotification"></span>
+<span kendo-notification="errorNotification"></span>
 

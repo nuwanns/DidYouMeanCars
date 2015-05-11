@@ -4,6 +4,7 @@ var AggregateRoot = require('../infrastructure/AggregateRoot'),
 
 function TodoList(id, name) {
     this.isArchived = null;
+    //this.todoItems = [];
     AggregateRoot.call(this, id);
     if (name) {
         this.applyChange(new this.TodoListCreated(id, name));
@@ -18,6 +19,10 @@ TodoList.prototype.rename = function (newName) {
 
 TodoList.prototype.archive = function () {
     this.applyChange(new this.TodoListArchived(this.id));
+};
+
+TodoList.prototype.addTodoItem = function () {
+    this.applyChange(new this.TodoItemAdded(this.id, name, dueDate));
 };
 
 // Event handlers
@@ -50,6 +55,12 @@ TodoList.prototype.TodoListArchived = function (id) {
     this.eventId = uuid.v4();
     this.data = { id : id };
 };
+
+TodoList.prototype.TodoItemAdded = function (id, name, dueDate){
+    this.eventType = 'TodoItemAdded';
+    this.eventId = uuid.v4();
+    this.data = { id : id, name : name, dueDate : dueDate };
+}
 
 module.exports = TodoList;
 
