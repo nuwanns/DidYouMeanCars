@@ -1,23 +1,25 @@
 var FakeEventStore = require('./FakeEventStore');
 
-function EventSpecification() {
+function EventSpecification(given, when, expect, handle) {
     this.caught = null;
     this.fakeStore = null;
-    this.given = function () { };
-    this.when = function () { };
-    this.onHandler = function () { };
-    this.expect = function () { };
+    this.given = given;
+    this.when = when;
+    this.expect = expect;
+    this.handle = handle;
 }
 
 EventSpecification.prototype.setUp = function () {
     this.caught = null;
     this.fakeStore = new FakeEventStore(given());
-    var handler = onHandler();
     var compareEvents = function (produced, expected) {
 
-    };
+        }, 
+        callback = function () {
+
+        };
     try {
-        handler.handle(when());
+        handle(when(), callback);
         var produced = fakeStore.peekChanges().toList();
         var expected = expect().toList();
         compareEvents(produced, expected);

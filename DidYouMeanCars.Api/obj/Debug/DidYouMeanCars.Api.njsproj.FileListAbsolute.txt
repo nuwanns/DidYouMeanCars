@@ -1,0 +1,2 @@
+C:\Personal\MSc\src\DidYouMeanCars\DidYouMeanCars.Api\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Personal\MSc\src\DidYouMeanCars\DidYouMeanCars.Api\obj\Debug\DidYouMeanCars.Api.njsprojResolveAssemblyReference.cache
