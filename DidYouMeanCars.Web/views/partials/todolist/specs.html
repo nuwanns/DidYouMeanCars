@@ -5,7 +5,15 @@
             <li ng-repeat="spec in specs">
                 <div class="well hoverwell">
                     <span>{{spec.name}}</span>
-                    <div><input type="button" ng-click="runSpec(spec)" value="Run Spec" class="btn btn-default" /></div>
+                    <input type="button" ng-click="runSpec(spec)" value="Run Spec" class="btn btn-default" />
+                    <div class="panel panel-default" ng-show="spec.result" style="margin-top:10px">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Spec output</h3>
+                        </div>
+                        <div class="panel-body" style="white-space:pre-wrap">
+                            {{spec.result}}
+                        </div>
+                    </div>
                 </div>
             </li>
         </ul>

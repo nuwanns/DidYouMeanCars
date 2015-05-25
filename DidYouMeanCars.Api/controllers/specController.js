@@ -4,8 +4,8 @@
         app.get("/api/spec", function (req, res) {
             res.set("Content-Type", "application/json");
             var results = [
-                { id : 'whenRenamingATodoList', name: 'when renaming a todolist' } , 
-                { id : 'whenArchivingATodoList', name: 'when archiving a todolist' }
+                { id : 'whenRenamingATodoList', name: 'when renaming a todolist', result: '' } , 
+                { id : 'whenArchivingATodoList', name: 'when archiving a todolist', result: '' }
             ];
             res.send(results);
         });

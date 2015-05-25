@@ -21,13 +21,12 @@ function whenRenamingATodoList() {
             return [new TodoList.prototype.TodoListRenamed(id, newName)];
         };
     
+    this.toString = function () {
+        return 'when renaming a todolist';
+    };  
     EventSpecification.call(this, given, when, expect, todoListCommandHandlers.renameTodoList, fakeRepository);
 }
 
 util.inherits(whenRenamingATodoList, EventSpecification);
-
-whenRenamingATodoList.toString = function (){
-    return 'when renaming a todolist';
-}
 
 module.exports = whenRenamingATodoList;
