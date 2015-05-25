@@ -38,13 +38,14 @@
     <Compile Include="config\express.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="controllers\controllers.js" />
+    <Compile Include="controllers\specController.js" />
     <Compile Include="controllers\todoListController.js" />
     <Compile Include="domain\TodoItem.js" />
     <Compile Include="domain\TodoList.js" />
     <Compile Include="infrastructure\AggregateRoot.js" />
     <Compile Include="infrastructure\EventSpecification.js" />
     <Compile Include="infrastructure\eventStore.js" />
-    <Compile Include="infrastructure\fakeEventStore.js" />
+    <Compile Include="infrastructure\fakeRepository.js" />
     <Compile Include="infrastructure\messageBus.js" />
     <Compile Include="infrastructure\repository.js" />
     <Compile Include="infrastructure\testFormatter.js" />
@@ -57,7 +58,8 @@
     <Compile Include="bin\www" />
     <Compile Include="services\atomEventReader.js" />
     <Compile Include="services\atomPoller.js" />
-    <Compile Include="tests\TodoList\when_renaming_a_todolist.js" />
+    <Compile Include="tests\specRunner.js" />
+    <Compile Include="tests\TodoList\whenRenamingATodoList.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />

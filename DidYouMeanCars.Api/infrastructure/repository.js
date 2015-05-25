@@ -6,7 +6,7 @@
         getStreamName = function (id) {
             return config.eventStoreUrl + config.streams.todoList + '-' + id;
         };
-    
+
     repository.save = function (streamUrl, aggregate, callback, expectedVersion) {
         eventStore.save(streamUrl, aggregate, callback, expectedVersion);
     };

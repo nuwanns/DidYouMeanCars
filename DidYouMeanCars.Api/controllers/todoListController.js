@@ -4,8 +4,7 @@
         messageBus = require('../infrastructure/messageBus'),
         todoListFacade = require('../readModel/todoListFacade');
     
-    todoListController.init = function (app) {
-              
+    todoListController.init = function (app) {       
         app.get("/api/todolist", function (req, res) {
             var callback = function (error, results) {
                 res.set("Content-Type", "application/json");
@@ -16,7 +15,7 @@
                     res.send(results);
                 }
             };
-            todoListFacade.getTodoLists(callback);          
+            todoListFacade.getTodoLists(callback);
         });
         
         app.post("/api/todolist", function (req, res) {
@@ -30,7 +29,7 @@
             };
             messageBus.send('CreateTodoList', { id : uuid.v4(), name : req.body.name }, callback);
         });
-
+        
         app.put("/api/todolist", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");

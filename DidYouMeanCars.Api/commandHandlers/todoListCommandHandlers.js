@@ -16,7 +16,7 @@
         repository.getById(command.id, TodoList, function (todoList) {
             todoList.rename(command.newName);
             repository.save(getStreamName(command.id), todoList, callback, command.originalVersion);
-        });       
+        });
     };
     
     todoListCommandHandlers.archiveTodoList = function (command, callback) {
@@ -25,5 +25,5 @@
             repository.save(todoList, callback, command.originalVersion);
         });
     };
-
+    
 })(module.exports);

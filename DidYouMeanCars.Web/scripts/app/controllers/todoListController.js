@@ -16,7 +16,7 @@
             .error(function (data) {
                 console.log(data);
             });
-    };
+    }; 
 
     $scope.openRenameModal = function (todoList) {
         var modalInstance = $modal.open({

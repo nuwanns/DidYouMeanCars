@@ -41,25 +41,37 @@ TodoList.prototype.TodoListCreated = function (id, name) {
     var self = this;
     this.eventType = 'TodoListCreated';
     this.eventId = uuid.v4();
-    this.data = {id : id, name : name};
+    this.data = { id : id, name : name };
+    this.toString = function () {
+        return this.eventType;
+    };
 };
 
 TodoList.prototype.TodoListRenamed = function (id, newName) {
     this.eventType = 'TodoListRenamed';
     this.eventId = uuid.v4();
-    this.data = {id : id, newName : newName};
+    this.data = { id : id, newName : newName };
+    this.toString = function () {
+        return this.eventType;
+    };
 };
 
 TodoList.prototype.TodoListArchived = function (id) {
     this.eventType = 'TodoListArchived';
     this.eventId = uuid.v4();
     this.data = { id : id };
+    this.toString = function () {
+        return this.eventType;
+    };
 };
 
 TodoList.prototype.TodoItemAdded = function (id, name, dueDate){
     this.eventType = 'TodoItemAdded';
     this.eventId = uuid.v4();
     this.data = { id : id, name : name, dueDate : dueDate };
+    this.toString = function () {
+        return this.eventType;
+    };
 }
 
 module.exports = TodoList;

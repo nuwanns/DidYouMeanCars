@@ -1,18 +1,18 @@
 (function(testFormatter){
     
     testFormatter.formatSpecification = function (specification){
-        var output = 'Specification: ' + specification.getType().name.replace('_', '');
+        var output = 'Specification: ' + specification.toString();
         output += '\n';
         output += 'Given that:';
-        specification.given().foreach(function(event){
-            output += '\t' + event;
+        specification.given().forEach(function(event){
+            output += '\t' + event.toString();
         });
         output += '\n';
-        output += 'When ' + specification.When();
+        output += 'When ' + specification.when.toString();
         output += '\n';
         output += 'Expect that:';
-        specification.expect().foreach(function(event){
-            output += '\t' + event;
+        specification.expect().forEach(function(event){
+            output += '\t' + event.toString();
         });
         return output;
     };
