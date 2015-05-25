@@ -1,0 +1,13 @@
+﻿<h3>Specs</h3>
+<div ng-controller="specController">
+    <div>
+        <ul>
+            <li ng-repeat="spec in specs">
+                <div class="well hoverwell">
+                    <span>{{spec.name}}</span>
+                    <div><input type="button" ng-click="runSpec(spec)" value="Run Spec" class="btn btn-default" /></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
