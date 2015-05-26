@@ -12,24 +12,18 @@
 </head>
 <body ng-app="app">
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="/todolist" class="btn btn-default navbar-btn">Todo list</a>
-                <a href="/todolist/new" class="btn btn-default navbar-btn">Create a new todo list</a>
-                <a href="/todolist/specs" class="btn btn-default navbar-btn">Specifications</a>
-            </div>
-        </div>
-    </nav>
+    <ul class=" nav nav-tabs">
+        <li>
+            <a href="/todolist">Todo list</a>
+        </li>
+        <li>
+            <a href="/todolist/new">Create a new todo list</a>
+        </li>
+        <li>
+            <a href="/todolist/specs">Specifications</a>
+        </li>
+    </ul>
 
-    <!--<div class="navbar">
-        <div class="navbar-inner">
-            <ul class="nav">
-                <li><a href="/todolist">Todo list</a></li>
-                <li><a href="/todolist/new">Create a new todo list</a></li>
-            </ul>
-        </div>
-    </div>-->
     <section class="content">
         <div ng-view class="container-section"></div>
     </section>

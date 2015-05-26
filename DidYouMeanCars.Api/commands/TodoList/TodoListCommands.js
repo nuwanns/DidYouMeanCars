@@ -12,7 +12,7 @@
         this.id = id;
         this.newName = newName;
         this.toString = function () {
-            return 'renaming the todolist with new name:' + newName;
+            return 'renaming the todolist with new name "' + newName + '"';
         };
     };
     

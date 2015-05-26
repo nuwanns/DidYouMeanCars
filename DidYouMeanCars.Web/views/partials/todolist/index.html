@@ -11,13 +11,13 @@
         </div>
     </div>
     <div class="modal-footer">
-        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-warning" />
-        <input type="submit" ng-click="ok()" value="Rename" class="btn btn-primary" />
+        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-default" />
+        <input type="submit" ng-click="ok()" value="Rename" class="btn btn-default" />
     </div>
 </script>
 
 <h1>Todo list</h1>
-<ul class="thumbnails">
+<ul class="thumbnails list-group, bulletless-list">
     <li ng-repeat="todoList in todoLists">
         <div class="well hoverwell">
             {{todoList.id}} - {{todoList.name}}
