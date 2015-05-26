@@ -31,14 +31,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="commandHandlers\todoItemCommandHandlers.js" />
     <Compile Include="commandHandlers\todoListCommandHandlers.js" />
-    <Compile Include="commands\TodoList\todoListCommands.js" />
+    <Compile Include="commands\todoItemCommands.js" />
+    <Compile Include="commands\todoListCommands.js" />
     <Compile Include="config\bootstrapper.js" />
     <Compile Include="config\config.js" />
     <Compile Include="config\express.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="controllers\controllers.js" />
     <Compile Include="controllers\specController.js" />
+    <Compile Include="controllers\todoItemController.js" />
     <Compile Include="controllers\todoListController.js" />
     <Compile Include="domain\TodoItem.js" />
     <Compile Include="domain\TodoList.js" />
@@ -70,7 +73,6 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="commandHandlers\" />
-    <Folder Include="commands\TodoList\" />
     <Folder Include="config\" />
     <Folder Include="controllers\" />
     <Folder Include="domain\" />

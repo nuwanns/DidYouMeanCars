@@ -2,16 +2,20 @@
     //TODO get this from config
     var root = 'http://localhost:1337';
 
-    $http.get(root + '/api/todolist').then(function (result) {
-        $scope.todoLists = result.data;
-    }, function (err) {
-        console.log(err);
-    });
+    function fetchTodoLists() {
+        $http.get(root + '/api/todolist').then(function (result) {
+            $scope.todoLists = result.data;
+        }, function (err) {
+            console.log(err);
+        });
+    }
+
+    fetchTodoLists();
 
     $scope.save = function (todoList) {
         $http.post(root + '/api/todolist', { name: todoList.name })
             .success(function (data) {
-                alert('saved');
+                $location.path('/todolist');
             })
             .error(function (data) {
                 console.log(data);
@@ -35,12 +39,35 @@
             $http.put(root + '/api/todolist', { id: selectedTodoList.id, newName: selectedTodoList.newName })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Renaming was successful', 'info')
+                fetchTodoLists();
             })
             .error(function (data) {
                 $scope.errorNotification.show(data, 'error');
             });
-        }, function () {
-            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.openAddTodoItemModal = function (todoList) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'addTodoItem.html',
+            controller: 'addTodoItemController',
+            windowClass: 'app-modal-window',
+            resolve: {
+                selectedTodoList: function () {
+                    return todoList;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (todoItem) {
+            $http.put(root + '/api/todoitem', { todoListId: todoList.todoListId, name: todoItem.name })
+            .success(function (data) {
+                $scope.renameSuccessfulNotification.show('Todo item added', 'info')
+            })
+            .error(function (data) {
+                $scope.errorNotification.show(data, 'error');
+            });
         });
     };
 
@@ -53,6 +80,22 @@ angular.module('app').controller('renameTodoListController', ['$scope', '$modalI
 
         $scope.ok = function () {
             $modalinstance.close($scope.selectedTodoList);
+        };
+
+        $scope.cancel = function () {
+            $modalinstance.dismiss('cancel');
+        };
+
+    }]);
+
+angular.module('app').controller('addTodoItemController', ['$scope', '$modalInstance', 'selectedTodoList',
+    function ($scope, $modalinstance, selectedTodoList) {
+
+        $scope.selectedTodoList = selectedTodoList;
+
+        $scope.ok = function (todoItem) {
+            todoItem.todoListId = $scope.selectedTodoList.id;
+            $modalinstance.close(todoItem);
         };
 
         $scope.cancel = function () {

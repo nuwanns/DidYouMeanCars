@@ -3,7 +3,7 @@
     uuid = require('node-uuid'),
     TodoList = require('../../domain/TodoList'),
     EventSpecification = require('../../infrastructure/EventSpecification'),
-    todoListCommands = require('../../commands/TodoList/todoListCommands'),
+    todoListCommands = require('../../commands/todoListCommands'),
     fakeRepository = require('../../infrastructure/fakeRepository'),
     todoListCommandHandlers = proxyquire('../../commandHandlers/todoListCommandHandlers', { '../infrastructure/repository' : fakeRepository });
 

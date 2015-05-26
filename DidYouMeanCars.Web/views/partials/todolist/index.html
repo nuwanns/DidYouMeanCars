@@ -16,20 +16,68 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="addTodoItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Todo Item</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <form novalidate>
+                <div>{{selectedTodoList.name}}</div>
+
+                <div>
+                    <label>Todo Item Name:</label>
+                    <input type="text" ng-model="todoItem.name" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-default" />
+        <input type="submit" ng-click="ok(todoItem)" value="Create" class="btn btn-default" />
+    </div>
+</script>
+
 <h1>Todo list</h1>
 <ul class="thumbnails list-group, bulletless-list">
     <li ng-repeat="todoList in todoLists">
         <div class="well hoverwell">
-            {{todoList.id}} - {{todoList.name}}
             <div class="row">
+                <div class="col-md-6">{{todoList.id}} - {{todoList.name}}</div>
                 <div class="col-md-2"><button class="btn btn-default" ng-click="openRenameModal(todoList)">Rename</button></div>
                 <div class="col-md-2"><input type="button" ng-click="archive()" value="Archive" class="btn btn-default" /></div>
-                <div class="col-md-2"><input type="button" ng-click="addTodo()" value="Add Todo" class="btn btn-default" /></div>
-
+                <div class="col-md-2"><input type="button" ng-click="openAddTodoItemModal(todoList)" value="Add Todo" class="btn btn-default" /></div>
             </div>
+            <ul class="list-group" style="margin-top:10px">
+                <li class="list-group-item">
+                    <div>
+                        <span>Todo Item 1</span>
+                        <input type="button" value="Schedule" class="btn btn-default" />
+                        <input type="button" value="Discard" class="btn btn-default" />
+                        <input type="button" value="Mark as completed" class="btn btn-default" />
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <span>Todo Item 2</span>
+                        <input type="button" value="Schedule" class="btn btn-default" />
+                        <input type="button" value="Discard" class="btn btn-default" />
+                        <input type="button" value="Mark as completed" class="btn btn-default" />
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <span>Todo Item 3</span>
+                        <input type="button" value="Schedule" class="btn btn-default" />
+                        <input type="button" value="Discard" class="btn btn-default" />
+                        <input type="button" value="Mark as completed" class="btn btn-default" />
+                    </div>
+                </li>
+            </ul>
         </div>
     </li>
 </ul>
+
 <span kendo-notification="saveSuccessfulNotification"></span>
 <span kendo-notification="renameSuccessfulNotification"></span>
 <span kendo-notification="errorNotification"></span>
