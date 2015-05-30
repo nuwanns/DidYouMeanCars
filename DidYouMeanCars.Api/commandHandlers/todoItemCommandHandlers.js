@@ -10,28 +10,28 @@
        
     todoItemCommandHandlers.createTodoItem = function (command, callback) {
         repository.getById(command.todoListId, TodoList, function (todoList) {
-            todoList.addTodoItem(command.name);
+            todoList.addTodoItem(command.todoItemId, command.name, command.todoListId);
             repository.save(getStreamName(command.todoListId), todoList, callback, command.originalVersion);
         });
     };
 
     todoItemCommandHandlers.discardTodoItem = function (command, callback) {
         repository.getById(command.todoListId, TodoList, function (todoList) {
-            todoList.discardTodoItem(command.id);
+            todoList.discardTodoItem(command.todoItemId, command.todoListId);
             repository.save(getStreamName(command.todoListId), todoList, callback, command.originalVersion);
         });
     };
 
     todoItemCommandHandlers.scheduleTodoItem = function (command, callback) {
         repository.getById(command.todoListId, TodoList, function (todoList) {
-            todoList.scheduleTodoItem(command.id, command.dueDate);
+            todoList.scheduleTodoItem(command.todoItemId, command.dueDate, command.todoListId);
             repository.save(getStreamName(command.todoListId), todoList, callback, command.originalVersion);
         });
     };
 
     todoItemCommandHandlers.completeTodoItem = function (command, callback) {
         repository.getById(command.todoListId, TodoList, function (todoList) {
-            todoList.completeTodoItem(command.id);
+            todoList.completeTodoItem(command.todoItemId, command.todoListId);
             repository.save(getStreamName(command.todoListId), todoList, callback, command.originalVersion);
         });
     };

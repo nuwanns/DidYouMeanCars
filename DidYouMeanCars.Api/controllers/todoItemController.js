@@ -14,11 +14,9 @@
                     res.send([{ status: 'error creating resource' }]);
                 }
             };
-            messageBus.send('CreateTodoItem', { id : uuid.v4(), name : req.body.name, todoListId : req.body.todoListId }, callback);
+            messageBus.send('CreateTodoItem', { todoItemId : uuid.v4(), name : req.body.name, todoListId : req.body.todoListId }, callback);
         });
-    };
-    
-    todoItemController.init = function (app) {
+
         app.delete("/api/todoitem", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
@@ -30,9 +28,7 @@
             };
             messageBus.send('DiscardTodoItem', { id : req.body.id, todoListId : req.body.todoListId }, callback);
         });
-    };
 
-    todoItemController.init = function (app) {
         app.post("/api/todoitem-scheduler", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
@@ -44,9 +40,7 @@
             };
             messageBus.send('ScheduleTodoItem', { id : req.body.id, dueDate : req.body.dueDate, todoListId : req.body.todoListId }, callback);
         });
-    };
 
-    todoItemController.init = function (app) {
         app.post("/api/todoitem-tracker", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");

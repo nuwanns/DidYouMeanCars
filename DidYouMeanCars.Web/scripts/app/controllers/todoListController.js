@@ -61,7 +61,7 @@
         });
 
         modalInstance.result.then(function (todoItem) {
-            $http.put(root + '/api/todoitem', { todoListId: todoList.todoListId, name: todoItem.name })
+            $http.post(root + '/api/todoitem', { name: todoItem.name, todoListId : todoItem.todoListId })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Todo item added', 'info')
             })

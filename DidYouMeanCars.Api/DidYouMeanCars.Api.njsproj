@@ -55,7 +55,8 @@
     <Compile Include="readModel\database.js" />
     <Compile Include="readModel\todoListFacade.js" />
     <Compile Include="readModel\viewCache\todoListView.js" />
-    <Compile Include="readModel\viewModels\todoListViewModel.js" />
+    <Compile Include="readModel\viewModels\TodoItemViewModel.js" />
+    <Compile Include="readModel\viewModels\TodoListViewModel.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
