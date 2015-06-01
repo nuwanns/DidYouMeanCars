@@ -38,6 +38,48 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="scheduleTodoItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Schedule Todo Item</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <form novalidate>
+                <div>{{selectedTodoItem.name}}</div>
+                <div>
+                    <label>Select the due date:</label>
+                    <input kendo-date-time-picker ng-model="selectedTodoItem.dueDate"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-default" />
+        <input type="submit" ng-click="ok(selectedTodoItem)" value="Schedule" class="btn btn-default" />
+    </div>
+</script>
+
+<script type="text/ng-template" id="completeTodoItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Complete Todo Item</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <form novalidate>
+                <div>{{selectedTodoItem.name}}</div>
+                <div>
+                    <label>Select the completed time:</label>
+                    <input kendo-date-time-picker ng-model="selectedTodoItem.completedTime" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-default" />
+        <input type="submit" ng-click="ok(selectedTodoItem)" value="Schedule" class="btn btn-default" />
+    </div>
+</script>
+
 <h1>Todo list</h1>
 <ul class="thumbnails list-group, bulletless-list">
     <li ng-repeat="todoList in todoLists">
@@ -49,28 +91,18 @@
                 <div class="col-md-2"><input type="button" ng-click="openAddTodoItemModal(todoList)" value="Add Todo" class="btn btn-default" /></div>
             </div>
             <ul class="list-group" style="margin-top:10px">
-                <li class="list-group-item">
+                <li class="list-group-item" ng-repeat="todoItem in todoList.todoItems">
                     <div>
-                        <span>Todo Item 1</span>
-                        <input type="button" value="Schedule" class="btn btn-default" />
-                        <input type="button" value="Discard" class="btn btn-default" />
-                        <input type="button" value="Mark as completed" class="btn btn-default" />
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div>
-                        <span>Todo Item 2</span>
-                        <input type="button" value="Schedule" class="btn btn-default" />
-                        <input type="button" value="Discard" class="btn btn-default" />
-                        <input type="button" value="Mark as completed" class="btn btn-default" />
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div>
-                        <span>Todo Item 3</span>
-                        <input type="button" value="Schedule" class="btn btn-default" />
-                        <input type="button" value="Discard" class="btn btn-default" />
-                        <input type="button" value="Mark as completed" class="btn btn-default" />
+                        <span>{{todoItem.name}}</span>
+                        <span ng-show="todoItem.dueDate">{{todoItem.dueDate}}</span>
+                        <div ng-hide="todoItem.isCompleted">
+                            <input type="button" value="Schedule" class="btn btn-default" ng-click="openScheduleTodoItemModal(todoItem, todoList.id)" />
+                            <input type="button" value="Discard" class="btn btn-default" ng-click="discardTodoItem(todoItem, todoList.id)" />
+                            <input type="button" value="Mark as completed" class="btn btn-default" ng-click="openCompleteTodoItemModal(todoItem, todoList.id)" />
+                        </div>
+                        <div ng-show="todoItem.isCompleted">
+                            <span>Completed on {{todoItem.completedTime}}</span>
+                        </div>
                     </div>
                 </li>
             </ul>

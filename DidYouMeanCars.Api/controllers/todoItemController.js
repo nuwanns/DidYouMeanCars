@@ -17,7 +17,7 @@
             messageBus.send('CreateTodoItem', { todoItemId : uuid.v4(), name : req.body.name, todoListId : req.body.todoListId }, callback);
         });
 
-        app.delete("/api/todoitem", function (req, res) {
+        app.delete("/api/todoitem/:todoItemId/:todoListId", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
                 if (isSuccessful) {
@@ -26,19 +26,19 @@
                     res.send([{ status: 'error creating resource' }]);
                 }
             };
-            messageBus.send('DiscardTodoItem', { id : req.body.id, todoListId : req.body.todoListId }, callback);
+            messageBus.send('DiscardTodoItem', { todoItemId : req.params.todoItemId, todoListId : req.params.todoListId }, callback);
         });
 
         app.post("/api/todoitem-scheduler", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
                 if (isSuccessful) {
-                    res.send([{ status: 'created' }]);
+                    res.send([{ status: 'updated' }]);
                 } else {
-                    res.send([{ status: 'error creating resource' }]);
+                    res.send([{ status: 'error updating resource' }]);
                 }
             };
-            messageBus.send('ScheduleTodoItem', { id : req.body.id, dueDate : req.body.dueDate, todoListId : req.body.todoListId }, callback);
+            messageBus.send('ScheduleTodoItem', { todoItemId : req.body.todoItemId, dueDate : req.body.dueDate, todoListId : req.body.todoListId }, callback);
         });
 
         app.post("/api/todoitem-tracker", function (req, res) {
@@ -50,7 +50,7 @@
                     res.send([{ status: 'error creating resource' }]);
                 }
             };
-            messageBus.send('CompleteTodoItem', { id : req.body.id, todoListId : req.body.todoListId }, callback);
+            messageBus.send('CompleteTodoItem', { todoItemId : req.body.todoItemId, todoListId : req.body.todoListId, completedTime : req.body.completedTime }, callback);
         });
     };
 

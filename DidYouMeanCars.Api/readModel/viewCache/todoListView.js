@@ -57,7 +57,6 @@
             if (err) {
                 next(err);
             } else {
-                //db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, handleErrors);
                 db.todoList.update({  id : event.data.todoListId }, 
                 {
                     $push: {
@@ -79,7 +78,18 @@
             if (err) {
                 next(err);
             } else {
-                //db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, handleErrors);
+                db.todoList.update({ id : event.data.todoListId }, 
+                {
+                    $pull: {
+                        "todoItems": { id : event.data.todoItemId }
+                    }
+                }, function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        next(null);
+                    }
+                });
             }
         });
     };
@@ -89,7 +99,18 @@
             if (err) {
                 next(err);
             } else {
-                //db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, handleErrors);
+                db.todoList.update({ id : event.data.todoListId, "todoItems.id" : event.data.todoItemId }, 
+                {
+                    $set: {
+                        "todoItems.$.dueDate": event.data.dueDate
+                    }
+                }, function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        next(null);
+                    }
+                });
             }
         });
     };
@@ -99,7 +120,18 @@
             if (err) {
                 next(err);
             } else {
-                //db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, handleErrors);
+                db.todoList.update({ id : event.data.todoListId, "todoItems.id" : event.data.todoItemId }, 
+                {
+                    $set: {
+                        "todoItems.$.isCompleted": true, "todoItems.$.completedTime": event.data.completedTime
+                    }
+                }, function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        next(null);
+                    }
+                });
             }
         });
     };

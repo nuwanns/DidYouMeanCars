@@ -33,8 +33,8 @@ TodoList.prototype.scheduleTodoItem = function (todoItemId, dueDate, todoListId)
     this.applyChange(new this.TodoItemScheduled(todoItemId, dueDate, todoListId));
 };
 
-TodoList.prototype.completeTodoItem = function (todoItemId, todoListId) {
-    this.applyChange(new this.TodoItemCompleted(todoItemId, todoListId));
+TodoList.prototype.completeTodoItem = function (todoItemId, completedTime, todoListId) {
+    this.applyChange(new this.TodoItemCompleted(todoItemId, completedTime, todoListId));
 };
 
 // Event handlers
@@ -88,7 +88,7 @@ TodoList.prototype.TodoItemCreated = function (todoItemId, name, todoListId){
 TodoList.prototype.TodoItemDiscarded = function (todoItemId, todoListId){
     this.eventType = 'TodoItemDiscarded';
     this.eventId = uuid.v4();
-    this.data = { todoItemId : todoItemId, todoListId : todoListid };
+    this.data = { todoItemId : todoItemId, todoListId : todoListId };
     this.toString = function () {
         return this.eventType;
     };
@@ -97,16 +97,16 @@ TodoList.prototype.TodoItemDiscarded = function (todoItemId, todoListId){
 TodoList.prototype.TodoItemScheduled = function (todoItemId, dueDate, todoListId){
     this.eventType = 'TodoItemScheduled';
     this.eventId = uuid.v4();
-    this.data = { todoItemId : todoItemId, todoListId : todoListid, dueDate : dueDate };
+    this.data = { todoItemId : todoItemId, todoListId : todoListId, dueDate : dueDate };
     this.toString = function () {
         return this.eventType;
     };
 }
 
-TodoList.prototype.TodoItemCompleted = function (todoItemId, todoListId) {
+TodoList.prototype.TodoItemCompleted = function (todoItemId, completedTime, todoListId) {
     this.eventType = 'TodoItemCompleted';
     this.eventId = uuid.v4();
-    this.data = { todoItemId : todoItemId, todoListId : todoListid };
+    this.data = { todoItemId : todoItemId, todoListId : todoListId, completedTime : completedTime };
     this.toString = function () {
         return this.eventType;
     };

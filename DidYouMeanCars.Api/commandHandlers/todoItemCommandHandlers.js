@@ -31,7 +31,7 @@
 
     todoItemCommandHandlers.completeTodoItem = function (command, callback) {
         repository.getById(command.todoListId, TodoList, function (todoList) {
-            todoList.completeTodoItem(command.todoItemId, command.todoListId);
+            todoList.completeTodoItem(command.todoItemId, command.completedTime, command.todoListId);
             repository.save(getStreamName(command.todoListId), todoList, callback, command.originalVersion);
         });
     };

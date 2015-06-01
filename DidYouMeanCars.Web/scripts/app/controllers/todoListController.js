@@ -20,7 +20,7 @@
             .error(function (data) {
                 console.log(data);
             });
-    }; 
+    };
 
     $scope.openRenameModal = function (todoList) {
         var modalInstance = $modal.open({
@@ -61,7 +61,7 @@
         });
 
         modalInstance.result.then(function (todoItem) {
-            $http.post(root + '/api/todoitem', { name: todoItem.name, todoListId : todoItem.todoListId })
+            $http.post(root + '/api/todoitem', { name: todoItem.name, todoListId: todoItem.todoListId })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Todo item added', 'info')
             })
@@ -70,6 +70,66 @@
             });
         });
     };
+
+    $scope.openScheduleTodoItemModal = function (todoItem, todoListId) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'scheduleTodoItem.html',
+            controller: 'scheduleTodoItemController',
+            windowClass: 'app-modal-window',
+            resolve: {
+                selectedTodoItem: function () {
+                    todoItem.todoListId = todoListId;
+                    return todoItem;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (todoItem) {
+            $http.post(root + '/api/todoitem-scheduler', { todoItemId: todoItem.id, dueDate: todoItem.dueDate, todoListId: todoItem.todoListId })
+            .success(function (data) {
+                $scope.renameSuccessfulNotification.show('Todo item scheduled', 'info')
+            })
+            .error(function (data) {
+                $scope.errorNotification.show(data, 'error');
+            });
+        });
+    };
+
+    $scope.openCompleteTodoItemModal = function (todoItem, todoListId) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'completeTodoItem.html',
+            controller: 'completeTodoItemController',
+            windowClass: 'app-modal-window',
+            resolve: {
+                selectedTodoItem: function () {
+                    todoItem.todoListId = todoListId;
+                    return todoItem;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (todoItem) {
+            $http.post(root + '/api/todoitem-tracker', { todoItemId: todoItem.id, completedTime: todoItem.completedTime, todoListId: todoItem.todoListId })
+            .success(function (data) {
+                $scope.renameSuccessfulNotification.show('Todo item completed', 'info')
+            })
+            .error(function (data) {
+                $scope.errorNotification.show(data, 'error');
+            });
+        });
+    };
+
+    $scope.discardTodoItem = function (todoItem, todoListId) {
+        $http.delete(root + '/api/todoitem/' + todoItem.id + "/" + todoListId)
+           .success(function (data) {
+               $scope.renameSuccessfulNotification.show('Todo item discarded', 'info')
+           })
+           .error(function (data) {
+               $scope.errorNotification.show(data, 'error');
+           });
+    }
 
 });
 
@@ -103,4 +163,35 @@ angular.module('app').controller('addTodoItemController', ['$scope', '$modalInst
         };
 
     }]);
+
+angular.module('app').controller('scheduleTodoItemController', ['$scope', '$modalInstance', 'selectedTodoItem',
+    function ($scope, $modalinstance, selectedTodoItem) {
+
+        $scope.selectedTodoItem = selectedTodoItem;
+
+        $scope.ok = function (todoItem) {
+            $modalinstance.close(todoItem);
+        };
+
+        $scope.cancel = function () {
+            $modalinstance.dismiss('cancel');
+        };
+
+    }]);
+
+angular.module('app').controller('completeTodoItemController', ['$scope', '$modalInstance', 'selectedTodoItem',
+    function ($scope, $modalinstance, selectedTodoItem) {
+
+        $scope.selectedTodoItem = selectedTodoItem;
+
+        $scope.ok = function (todoItem) {
+            $modalinstance.close(todoItem);
+        };
+
+        $scope.cancel = function () {
+            $modalinstance.dismiss('cancel');
+        };
+
+    }]);
+
 
