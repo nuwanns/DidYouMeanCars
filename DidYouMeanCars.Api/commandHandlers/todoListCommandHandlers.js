@@ -22,7 +22,7 @@
     todoListCommandHandlers.archiveTodoList = function (command, callback) {
         repository.getById(command.id, TodoList, function (todoList) {
             todoList.archive();
-            repository.save(todoList, callback, command.originalVersion);
+            repository.save(getStreamName(command.id), todoList, callback, command.originalVersion);
         });
     };
     

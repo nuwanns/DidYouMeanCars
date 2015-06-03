@@ -101,37 +101,41 @@
     </div>
 </script>
 
-<h1>Todo list</h1>
+<h3>Todo list</h3>
 <ul class="thumbnails list-group, bulletless-list">
     <li ng-repeat="todoList in todoLists">
         <div class="well hoverwell">
-            <div class="row">
-                <div class="col-md-6">{{todoList.id}} - {{todoList.name}}</div>
-                <div class="col-md-2"><button class="btn btn-default" ng-click="openRenameModal(todoList)">Rename</button></div>
-                <div class="col-md-2"><input type="button" ng-click="archive()" value="Archive" class="btn btn-default" /></div>
-                <div class="col-md-2"><input type="button" ng-click="openAddTodoItemModal(todoList)" value="Add Todo" class="btn btn-default" /></div>
-            </div>
-            <ul class="list-group" style="margin-top:10px">
-                <li class="list-group-item" ng-repeat="todoItem in todoList.todoItems">
-                    <div>
-                        <span>{{todoItem.name}}</span>
-                        <div ng-hide="todoItem.isCompleted">
-                            <div ng-show="todoItem.dueDate">
-                                <span>Is due on : {{todoItem.dueDate}}</span>
-                                <input type="button" value="Re Schedule" class="btn btn-default" ng-click="openReScheduleTodoItemModal(todoItem, todoList.id)" />
-                            </div>
-                            <div ng-hide="todoItem.dueDate">
-                                <input type="button" value="Schedule" class="btn btn-default" ng-click="openScheduleTodoItemModal(todoItem, todoList.id)" />
-                            </div>
-                            <input type="button" value="Discard" class="btn btn-default" ng-click="discardTodoItem(todoItem, todoList)" />
-                            <input type="button" value="Mark as completed" class="btn btn-default" ng-click="openCompleteTodoItemModal(todoItem, todoList.id)" />
-                        </div>
-                        <div ng-show="todoItem.isCompleted">
-                            <span>Completed on {{todoItem.completedTime}}</span>
-                        </div>
+            {{todoList.id}} - {{todoList.name}}
+            <input type="button" ng-click="openRenameModal(todoList)" value="Rename" class="btn btn-default" ng-disabled="todoList.isArchived" />
+            <input type="button" ng-click="archive(todoList)" value="Archive" class="btn btn-default" ng-disabled="todoList.isArchived" />
+            <input type="button" ng-click="openAddTodoItemModal(todoList)" value="Add Todo" class="btn btn-default" ng-disabled="todoList.isArchived" />
+        <ul class="list-group" style="margin-top:10px">
+            <li class="list-group-item" ng-repeat="todoItem in todoList.todoItems">
+                <div>
+                    <span>{{todoItem.name}}</span>
+                    <div ng-hide="todoItem.isCompleted">
+                        <span ng-show="todoItem.dueDate">Is due on : {{todoItem.dueDate}}</span>
+                        <input type="button" value="Re Schedule" class="btn btn-default"
+                               ng-click="openReScheduleTodoItemModal(todoItem, todoList.id)"
+                               ng-show="todoItem.dueDate"
+                               ng-disabled="todoList.isArchived" />
+                        <input type="button" value="Schedule" class="btn btn-default"
+                               ng-click="openScheduleTodoItemModal(todoItem, todoList.id)"
+                               ng-hide="todoItem.dueDate"
+                               ng-disabled="todoList.isArchived" />
+                        <input type="button" value="Discard" class="btn btn-default"
+                               ng-click="discardTodoItem(todoItem, todoList)"
+                               ng-disabled="todoList.isArchived" />
+                        <input type="button" value="Mark as completed" class="btn btn-default"
+                               ng-click="openCompleteTodoItemModal(todoItem, todoList.id)"
+                               ng-disabled="todoList.isArchived" />
                     </div>
-                </li>
-            </ul>
+                    <div ng-show="todoItem.isCompleted">
+                        <span>Completed on {{todoItem.completedTime}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
         </div>
     </li>
 </ul>

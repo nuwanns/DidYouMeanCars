@@ -41,7 +41,7 @@
             if (err) {
                 next(err);
             } else {
-                db.todoList.update({ id : event.data.id }, { $set: { isArchived : event.data.isArchived } }, function (err) {
+                db.todoList.update({ id : event.data.id }, { $set: { isArchived : true } }, function (err) {
                     if (err) {
                         next(err);
                     } else {

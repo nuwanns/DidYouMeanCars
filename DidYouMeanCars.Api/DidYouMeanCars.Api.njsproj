@@ -40,6 +40,7 @@
     <Compile Include="config\express.js" />
     <Compile Include="config\routes.js" />
     <Compile Include="controllers\controllers.js" />
+    <Compile Include="controllers\projectionsController.js" />
     <Compile Include="controllers\specController.js" />
     <Compile Include="controllers\todoItemController.js" />
     <Compile Include="controllers\todoListController.js" />
@@ -62,7 +63,6 @@
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="services\atomEventReader.js" />
-    <Compile Include="services\atomPoller.js" />
     <Compile Include="tests\specRunner.js" />
     <Compile Include="tests\TodoList\whenRenamingATodoList.js" />
     <Content Include="package.json" />

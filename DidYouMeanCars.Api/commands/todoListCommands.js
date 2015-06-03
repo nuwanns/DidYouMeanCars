@@ -16,10 +16,10 @@
         };
     };
     
-    todoListCommands.ArchiveTodoList = function (id) {
+    todoListCommands.ArchiveTodoList = function (id, name) {
         this.id = id;
         this.toString = function () {
-            return 'archiving the todolist with id:' + id;
+            return 'archiving the todolist with id:' + id + 'and name:' + name;
         };
     };
 

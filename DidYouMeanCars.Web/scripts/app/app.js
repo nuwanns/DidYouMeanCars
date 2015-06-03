@@ -7,6 +7,7 @@ angular.module('app').config(function($routeProvider, $locationProvider){
         .when('/todolist/new', { templateUrl: '../../views/partials/todoList/new.html', controller: 'todoListController' })
         .when('/todolist/rename', { templateUrl: '../../views/partials/todoList/rename.html', controller: 'todoListController' })
         .when('/todolist/specs', { templateUrl: '../../views/partials/todoList/specs.html', controller: 'specController' })
+        .when('/todolist/projections', { templateUrl: '../../views/partials/todoList/projections.html', controller: 'projectionsController' })
         .otherwise({redirectTo: '/todolist'});
 });
 

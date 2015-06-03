@@ -30,7 +30,7 @@
             messageBus.send('CreateTodoList', { id : uuid.v4(), name : req.body.name }, callback);
         });
         
-        app.put("/api/todolist", function (req, res) {
+        app.put("/api/todolist-renamer", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
                 if (isSuccessful) {
@@ -40,6 +40,18 @@
                 }
             };
             messageBus.send('RenameTodoList', { id : req.body.id, newName : req.body.newName }, callback);
+        });
+
+        app.put("/api/todolist-archiver", function (req, res) {
+            var callback = function (isSuccessful) {
+                res.set("Content-Type", "application/json");
+                if (isSuccessful) {
+                    res.send([{ status: 'updated' }]);
+                } else {
+                    res.send([{ status: 'error updating resource' }]);
+                }
+            };
+            messageBus.send('ArchiveTodoList', { id : req.body.id, name : req.body.name }, callback);
         });
     };
 

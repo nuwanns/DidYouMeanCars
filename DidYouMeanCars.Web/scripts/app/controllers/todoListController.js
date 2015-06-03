@@ -22,6 +22,16 @@
             });
     };
 
+    $scope.archive = function (todoList) {
+        $http.put(root + '/api/todolist-archiver', { id: todoList.id, name: todoList.name })
+            .success(function (data) {
+                $location.path('/todolist');
+            })
+            .error(function (data) {
+                console.log(data);
+            });
+    };
+
     $scope.openRenameModal = function (todoList) {
         var modalInstance = $modal.open({
             animation: true,
@@ -36,7 +46,7 @@
         });
 
         modalInstance.result.then(function (selectedTodoList) {
-            $http.put(root + '/api/todolist', { id: selectedTodoList.id, newName: selectedTodoList.newName })
+            $http.put(root + '/api/todolist-renamer', { id: selectedTodoList.id, newName: selectedTodoList.newName })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Renaming was successful', 'info')
                 fetchTodoLists();

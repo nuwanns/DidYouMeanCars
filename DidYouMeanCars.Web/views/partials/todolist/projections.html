@@ -1,0 +1,25 @@
+﻿<h3>Projections</h3>
+<div ng-controller="projectionsController">
+    <div>
+        <ul class="list-group, bulletless-list">
+            <li ng-repeat="projection in projections">
+                <div class="well hoverwell">
+                    <span>{{projection.name}}</span>
+                    <input type="button" ng-click="runProjection(projection)" value="Run Projection" class="btn btn-default" />
+                    <div class="panel panel-default" ng-show="projection.result" style="margin-top:10px">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Projection output</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-top:10px">
+                                <li class="list-group-item" ng-repeat="event in projection.result">
+                                    <span>{{event.data.todoListName}} - {{event.data.todoItemName}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

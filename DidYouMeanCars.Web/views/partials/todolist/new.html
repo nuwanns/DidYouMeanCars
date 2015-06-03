@@ -1,11 +1,11 @@
 ﻿<h3>New TodoList</h3>
 <div ng-controller="todoListController">
-    <form novalidate>
-        <div><label>Name</label></div>
-        <div><input type="text" ng-model="todoList.name"/></div>
-        <div>
-            <input type="button" ng-click="reset()" value="Reset" class="btn btn-default" />
-            <input type="submit" ng-click="save(todoList)" value="Save" class="btn btn-default" />
+    <form novalidate class="form-inline">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input class="form-control" type="text" ng-model="todoList.name" />
         </div>
+        <input type="button" ng-click="reset()" value="Reset" class="btn btn-default" />
+        <input type="submit" ng-click="save(todoList)" value="Save" class="btn btn-default" />
     </form>
 </div>
