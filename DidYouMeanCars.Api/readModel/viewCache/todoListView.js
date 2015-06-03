@@ -115,6 +115,27 @@
         });
     };
     
+    todoListView.handleTodoItemReScheduled = function (event, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.todoList.update({ id : event.data.todoListId, "todoItems.id" : event.data.todoItemId }, 
+                {
+                    $set: {
+                        "todoItems.$.dueDate": event.data.dueDate
+                    }
+                }, function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        next(null);
+                    }
+                });
+            }
+        });
+    };
+    
     todoListView.handleTodoItemCompleted = function (event, next) {
         database.getDb(function (err, db) {
             if (err) {

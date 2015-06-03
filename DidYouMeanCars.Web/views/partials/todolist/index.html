@@ -48,7 +48,28 @@
                 <div>{{selectedTodoItem.name}}</div>
                 <div>
                     <label>Select the due date:</label>
-                    <input kendo-date-time-picker ng-model="selectedTodoItem.dueDate"/>
+                    <input kendo-date-time-picker ng-model="selectedTodoItem.dueDate" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" ng-click="cancel()" value="Cancel" class="btn btn-default" />
+        <input type="submit" ng-click="ok(selectedTodoItem)" value="Schedule" class="btn btn-default" />
+    </div>
+</script>
+
+<script type="text/ng-template" id="reScheduleTodoItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Re Schedule Todo Item</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <form novalidate>
+                <div>{{selectedTodoItem.name}}</div>
+                <div>
+                    <label>Select the due date:</label>
+                    <input kendo-date-time-picker ng-model="selectedTodoItem.dueDate" />
                 </div>
             </form>
         </div>
@@ -94,10 +115,15 @@
                 <li class="list-group-item" ng-repeat="todoItem in todoList.todoItems">
                     <div>
                         <span>{{todoItem.name}}</span>
-                        <span ng-show="todoItem.dueDate">{{todoItem.dueDate}}</span>
                         <div ng-hide="todoItem.isCompleted">
-                            <input type="button" value="Schedule" class="btn btn-default" ng-click="openScheduleTodoItemModal(todoItem, todoList.id)" />
-                            <input type="button" value="Discard" class="btn btn-default" ng-click="discardTodoItem(todoItem, todoList.id)" />
+                            <div ng-show="todoItem.dueDate">
+                                <span>Is due on : {{todoItem.dueDate}}</span>
+                                <input type="button" value="Re Schedule" class="btn btn-default" ng-click="openReScheduleTodoItemModal(todoItem, todoList.id)" />
+                            </div>
+                            <div ng-hide="todoItem.dueDate">
+                                <input type="button" value="Schedule" class="btn btn-default" ng-click="openScheduleTodoItemModal(todoItem, todoList.id)" />
+                            </div>
+                            <input type="button" value="Discard" class="btn btn-default" ng-click="discardTodoItem(todoItem, todoList)" />
                             <input type="button" value="Mark as completed" class="btn btn-default" ng-click="openCompleteTodoItemModal(todoItem, todoList.id)" />
                         </div>
                         <div ng-show="todoItem.isCompleted">

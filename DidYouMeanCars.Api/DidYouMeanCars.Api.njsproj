@@ -52,6 +52,7 @@
     <Compile Include="infrastructure\messageBus.js" />
     <Compile Include="infrastructure\repository.js" />
     <Compile Include="infrastructure\testFormatter.js" />
+    <Compile Include="projections\discardedAfterReSchedulingProjection.js" />
     <Compile Include="readModel\database.js" />
     <Compile Include="readModel\todoListFacade.js" />
     <Compile Include="readModel\viewCache\todoListView.js" />
@@ -79,6 +80,7 @@
     <Folder Include="domain\" />
     <Folder Include="infrastructure\" />
     <Folder Include="commands\" />
+    <Folder Include="projections\" />
     <Folder Include="tests\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />

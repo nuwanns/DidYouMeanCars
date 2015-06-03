@@ -96,6 +96,31 @@
         });
     };
 
+    $scope.openReScheduleTodoItemModal = function (todoItem, todoListId) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'reScheduleTodoItem.html',
+            controller: 'reScheduleTodoItemController',
+            windowClass: 'app-modal-window',
+            resolve: {
+                selectedTodoItem: function () {
+                    todoItem.todoListId = todoListId;
+                    return todoItem;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (todoItem) {
+            $http.put(root + '/api/todoitem-scheduler', { todoItemId: todoItem.id, dueDate: todoItem.dueDate, todoListId: todoItem.todoListId })
+            .success(function (data) {
+                $scope.renameSuccessfulNotification.show('Todo item re scheduled', 'info')
+            })
+            .error(function (data) {
+                $scope.errorNotification.show(data, 'error');
+            });
+        });
+    };
+
     $scope.openCompleteTodoItemModal = function (todoItem, todoListId) {
         var modalInstance = $modal.open({
             animation: true,
@@ -121,8 +146,8 @@
         });
     };
 
-    $scope.discardTodoItem = function (todoItem, todoListId) {
-        $http.delete(root + '/api/todoitem/' + todoItem.id + "/" + todoListId)
+    $scope.discardTodoItem = function (todoItem, todoList) {
+        $http.delete(root + '/api/todoitem/' + todoItem.id + "/" + todoItem.name + "/" + todoList.id + "/" + todoList.name)
            .success(function (data) {
                $scope.renameSuccessfulNotification.show('Todo item discarded', 'info')
            })
@@ -165,6 +190,21 @@ angular.module('app').controller('addTodoItemController', ['$scope', '$modalInst
     }]);
 
 angular.module('app').controller('scheduleTodoItemController', ['$scope', '$modalInstance', 'selectedTodoItem',
+    function ($scope, $modalinstance, selectedTodoItem) {
+
+        $scope.selectedTodoItem = selectedTodoItem;
+
+        $scope.ok = function (todoItem) {
+            $modalinstance.close(todoItem);
+        };
+
+        $scope.cancel = function () {
+            $modalinstance.dismiss('cancel');
+        };
+
+    }]);
+
+angular.module('app').controller('reScheduleTodoItemController', ['$scope', '$modalInstance', 'selectedTodoItem',
     function ($scope, $modalinstance, selectedTodoItem) {
 
         $scope.selectedTodoItem = selectedTodoItem;

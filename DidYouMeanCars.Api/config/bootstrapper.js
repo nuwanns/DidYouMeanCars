@@ -12,6 +12,7 @@
         messageBus.registerHandler('CreateTodoItem', todoItemCommandHandlers.createTodoItem);
         messageBus.registerHandler('DiscardTodoItem', todoItemCommandHandlers.discardTodoItem);
         messageBus.registerHandler('ScheduleTodoItem', todoItemCommandHandlers.scheduleTodoItem);
+        messageBus.registerHandler('ReScheduleTodoItem', todoItemCommandHandlers.reScheduleTodoItem);
         messageBus.registerHandler('CompleteTodoItem', todoItemCommandHandlers.completeTodoItem);
 
         messageBus.registerHandler('TodoListCreated', todoListView.handleTodoListCreated);
@@ -20,6 +21,7 @@
         messageBus.registerHandler('TodoItemCreated', todoListView.handleTodoItemCreated);
         messageBus.registerHandler('TodoItemDiscarded', todoListView.handleTodoItemDiscarded);
         messageBus.registerHandler('TodoItemScheduled', todoListView.handleTodoItemScheduled);
+        messageBus.registerHandler('TodoItemReScheduled', todoListView.handleTodoItemReScheduled);
         messageBus.registerHandler('TodoItemCompleted', todoListView.handleTodoItemCompleted);
     };
 

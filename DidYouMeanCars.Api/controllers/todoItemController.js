@@ -17,7 +17,7 @@
             messageBus.send('CreateTodoItem', { todoItemId : uuid.v4(), name : req.body.name, todoListId : req.body.todoListId }, callback);
         });
 
-        app.delete("/api/todoitem/:todoItemId/:todoListId", function (req, res) {
+        app.delete("/api/todoitem/:todoItemId/:todoItemName/:todoListId/:todoListName", function (req, res) {
             var callback = function (isSuccessful) {
                 res.set("Content-Type", "application/json");
                 if (isSuccessful) {
@@ -26,7 +26,10 @@
                     res.send([{ status: 'error creating resource' }]);
                 }
             };
-            messageBus.send('DiscardTodoItem', { todoItemId : req.params.todoItemId, todoListId : req.params.todoListId }, callback);
+            messageBus.send('DiscardTodoItem', {
+                todoItemId : req.params.todoItemId, todoItemName : req.params.todoItemName, 
+                todoListId : req.params.todoListId, todoListName : req.params.todoListName
+            }, callback);
         });
 
         app.post("/api/todoitem-scheduler", function (req, res) {
@@ -39,6 +42,18 @@
                 }
             };
             messageBus.send('ScheduleTodoItem', { todoItemId : req.body.todoItemId, dueDate : req.body.dueDate, todoListId : req.body.todoListId }, callback);
+        });
+        
+        app.put("/api/todoitem-scheduler", function (req, res) {
+            var callback = function (isSuccessful) {
+                res.set("Content-Type", "application/json");
+                if (isSuccessful) {
+                    res.send([{ status: 'updated' }]);
+                } else {
+                    res.send([{ status: 'error updating resource' }]);
+                }
+            };
+            messageBus.send('ReScheduleTodoItem', { todoItemId : req.body.todoItemId, dueDate : req.body.dueDate, todoListId : req.body.todoListId }, callback);
         });
 
         app.post("/api/todoitem-tracker", function (req, res) {

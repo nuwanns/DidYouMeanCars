@@ -1,1 +1,1 @@
-C:\Work\EventStore\EventStore.ClusterNode.exe --db .././db --log .././logs
+C:\Work\EventStore\EventStore.ClusterNode.exe --db .././db --log .././logs --run-projections=all

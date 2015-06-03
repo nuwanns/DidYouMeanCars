@@ -9,9 +9,11 @@
         };
     };
     
-    todoItemCommands.DiscardTodoItem = function (id, name, todoListId) {
+    todoItemCommands.DiscardTodoItem = function (id, todoItemName, todoListId, todoListName) {
         this.id = id;
         this.todoListId = todoListId;
+        this.todoItemName = name;
+        this.todoListName = todoListName
         this.toString = function () {
             return 'discarding the todo item "' + name + '"';
         };
@@ -22,6 +24,14 @@
         this.todoListId = todoListId;
         this.toString = function () {
             return 'scheduling the todo item "' + name + '" on ' + dueDate;
+        };
+    };
+    
+    todoItemCommands.ReScheduleTodoItem = function (id, name, dueDate, todoListId) {
+        this.id = id;
+        this.todoListId = todoListId;
+        this.toString = function () {
+            return 're scheduling the todo item "' + name + '" on ' + dueDate;
         };
     };
 
