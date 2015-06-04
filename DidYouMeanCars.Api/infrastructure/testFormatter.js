@@ -15,10 +15,9 @@
             output += '\t' + event.toString();
         });
         
-        output += 'Assertions: \n';
-        var assertions = ['Assertion 1 is true', 'Assertion 2 is true'];
-        assertions.forEach(function (assertion) {
-            output += '\n' + assertion;
+        output += '\n \n Assertions: \n';
+        specification.assertionResults.forEach(function (assertionResult) {
+            output += '\n' + assertionResult;
         });
         return output;
     };

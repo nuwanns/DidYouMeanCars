@@ -1,14 +1,16 @@
 var testFormatter = require('./testFormatter');
 
-function EventSpecification(given, when, expect, handle, repository) {
+function EventSpecification(given, when, expect, handle, assertions, repository) {
     this.sut = null;
     this.given = given;
     this.when = when();
     this.expect = expect;
     this.handle = handle;
+    this.assertions = assertions;
     this.repository = repository;
     this.caught = null;
     this.produced = null;
+    this.assertionResults = [];
 }
 
 EventSpecification.prototype.assert = function () {
@@ -30,8 +32,12 @@ EventSpecification.prototype.assert = function () {
             return true;
         }, 
         areEqual = null,
-        output = null;
+        output = null,
+        self = this;
     compareEvents(expected, produced);
+    this.assertions().forEach(function (assertion) {
+        self.assertionResults.push( assertion.toString() + ' - ' + assertion.assert(expected));
+    });
     output = testFormatter.formatSpecification(this);
     return output;
 };

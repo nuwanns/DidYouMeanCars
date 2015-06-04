@@ -19,12 +19,23 @@ function whenRenamingATodoList() {
         },
         expect = function () {
             return [new TodoList.prototype.TodoListRenamed(id, newName)];
+        },
+        assertions = function () {
+            var exactlyOneEvent = {
+                toString : function(){
+                    return 'only one event was raised';
+                },
+                assert : function (expected){
+                    return expected.length === 1;
+                }
+            };
+            return [exactlyOneEvent];
         };
     
     this.toString = function () {
         return 'when renaming a todolist';
     };  
-    EventSpecification.call(this, given, when, expect, todoListCommandHandlers.renameTodoList, fakeRepository);
+    EventSpecification.call(this, given, when, expect, todoListCommandHandlers.renameTodoList, assertions, fakeRepository);
 }
 
 util.inherits(whenRenamingATodoList, EventSpecification);
