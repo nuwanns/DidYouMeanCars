@@ -5,7 +5,6 @@
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     routes = require('./routes/index'),
-    users = require('./routes/users'),
     cors = require('cors'),
     controllers = require('./controllers/controllers'),
     bootstrapper = require('./config/bootstrapper.js'),
@@ -24,22 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', routes);
-app.use('/users', users);
 
 controllers.init(app);
 bootstrapper.init();
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
@@ -50,8 +43,6 @@ if (app.get('env') === 'development') {
     });
 }
 
-// production error handler
-// no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -59,8 +50,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-// Added a test comment to check git commits
-
 
 module.exports = app;

@@ -16,6 +16,7 @@
         $http.post(root + '/api/todolist', { name: todoList.name })
             .success(function (data) {
                 $location.path('/todolist');
+                fetchTodoLists();
             })
             .error(function (data) {
                 console.log(data);
@@ -25,7 +26,7 @@
     $scope.archive = function (todoList) {
         $http.put(root + '/api/todolist-archiver', { id: todoList.id, name: todoList.name })
             .success(function (data) {
-                $location.path('/todolist');
+                fetchTodoLists();
             })
             .error(function (data) {
                 console.log(data);
@@ -74,6 +75,7 @@
             $http.post(root + '/api/todoitem', { name: todoItem.name, todoListId: todoItem.todoListId })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Todo item added', 'info')
+                fetchTodoLists();
             })
             .error(function (data) {
                 $scope.errorNotification.show(data, 'error');
@@ -99,6 +101,7 @@
             $http.post(root + '/api/todoitem-scheduler', { todoItemId: todoItem.id, dueDate: todoItem.dueDate, todoListId: todoItem.todoListId })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Todo item scheduled', 'info')
+                fetchTodoLists();
             })
             .error(function (data) {
                 $scope.errorNotification.show(data, 'error');
@@ -124,6 +127,7 @@
             $http.put(root + '/api/todoitem-scheduler', { todoItemId: todoItem.id, dueDate: todoItem.dueDate, todoListId: todoItem.todoListId })
             .success(function (data) {
                 $scope.renameSuccessfulNotification.show('Todo item re scheduled', 'info')
+                fetchTodoLists();
             })
             .error(function (data) {
                 $scope.errorNotification.show(data, 'error');
@@ -148,7 +152,8 @@
         modalInstance.result.then(function (todoItem) {
             $http.post(root + '/api/todoitem-tracker', { todoItemId: todoItem.id, completedTime: todoItem.completedTime, todoListId: todoItem.todoListId })
             .success(function (data) {
-                $scope.renameSuccessfulNotification.show('Todo item completed', 'info')
+                $scope.renameSuccessfulNotification.show('Todo item completed', 'info');
+                fetchTodoLists();
             })
             .error(function (data) {
                 $scope.errorNotification.show(data, 'error');
@@ -160,6 +165,7 @@
         $http.delete(root + '/api/todoitem/' + todoItem.id + "/" + todoItem.name + "/" + todoList.id + "/" + todoList.name)
            .success(function (data) {
                $scope.renameSuccessfulNotification.show('Todo item discarded', 'info')
+               fetchTodoLists();
            })
            .error(function (data) {
                $scope.errorNotification.show(data, 'error');

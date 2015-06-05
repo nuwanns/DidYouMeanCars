@@ -60,7 +60,6 @@
     <Compile Include="readModel\viewModels\TodoItemViewModel.js" />
     <Compile Include="readModel\viewModels\TodoListViewModel.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="services\atomEventReader.js" />
     <Compile Include="tests\specRunner.js" />
