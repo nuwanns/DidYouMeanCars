@@ -23,7 +23,7 @@
                 if (isSuccessful) {
                     res.send([{ status: 'deleted' }]);
                 } else {
-                    res.send([{ status: 'error creating resource' }]);
+                    res.send([{ status: 'error deleting resource' }]);
                 }
             };
             messageBus.send('DiscardTodoItem', {

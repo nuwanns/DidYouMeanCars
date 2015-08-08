@@ -1,5 +1,4 @@
 ﻿angular.module('app').controller('todoListController', function ($scope, $http, $location, $modal) {
-    //TODO get this from config
     var root = 'http://localhost:1337';
 
     function fetchTodoLists() {

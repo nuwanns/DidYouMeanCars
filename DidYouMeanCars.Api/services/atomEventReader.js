@@ -22,10 +22,14 @@
                         streamData += data;
                     });
                     response.on('end', function(){
-                        var parsedData = JSON.parse(streamData);
-                        var next = processEvents( parsedData, events);
-                        var previousPageUrl = getFeedLink(parsedData.links, 'next');
-                        readPage(previousPageUrl, callback);
+                        if (streamData) {
+                            var parsedData = JSON.parse(streamData);
+                            var next = processEvents(parsedData, events);
+                            var previousPageUrl = getFeedLink(parsedData.links, 'next');
+                            readPage(previousPageUrl, callback);
+                        } else {
+                            callback(events);
+                        }
                     });
                 })
             }

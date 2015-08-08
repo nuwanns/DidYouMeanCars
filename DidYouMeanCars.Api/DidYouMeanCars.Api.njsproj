@@ -62,8 +62,10 @@
     <Compile Include="routes\index.js" />
     <Compile Include="bin\www" />
     <Compile Include="services\atomEventReader.js" />
+    <Compile Include="tests\E2E\todoListE2ETest.js" />
     <Compile Include="tests\specRunner.js" />
     <Compile Include="tests\TodoList\whenRenamingATodoList.js" />
+    <Compile Include="tests\unit\messageBusUnitTest.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
@@ -90,6 +92,8 @@
     <Folder Include="readModel\viewModels\" />
     <Folder Include="routes\" />
     <Folder Include="services\" />
+    <Folder Include="tests\E2E\" />
+    <Folder Include="tests\unit\" />
     <Folder Include="tests\TodoList\" />
     <Folder Include="views\" />
   </ItemGroup>

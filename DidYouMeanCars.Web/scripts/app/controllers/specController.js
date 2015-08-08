@@ -1,5 +1,4 @@
 ﻿angular.module('app').controller('specController', function ($scope, $http, $location, _ ) {
-    //TODO get this from config
     var root = 'http://localhost:1337';
 
     $http.get(root + '/api/spec').then(function (result) {
